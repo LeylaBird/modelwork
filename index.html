@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grouped Artwork Portfolio</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .category {
+            margin: 2em;
+            padding: 1em;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header {
+            cursor: pointer;
+            font-size: 1.5rem;
+            margin: 0;
+            padding: 0.5em 0;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .category-content {
+            display: none;
+            padding: 1em 0;
+        }
+
+        .category-content.active {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        .portfolio-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+
+        .portfolio-item .content {
+            padding: 1em;
+        }
+
+        .portfolio-item h2 {
+            font-size: 1.25rem;
+            margin: 0.5em 0;
+        }
+
+        .portfolio-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Popup Styles */
+        .image-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            overflow-y: auto;
+        }
+
+        .image-popup-overlay.active {
+            display: flex;
+        }
+
+        .image-popup {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .image-popup img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn:hover {
+            background-color: #ddd;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2em;
+            padding: 1em;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Grouped Artwork Portfolio</h1>
+    </header>
+
+    <!-- Categories -->
+    <div class="category">
+        <h2 class="category-header">Traditional Art</h2>
+        <div class="category-content">
+            <div class="portfolio-item">
+                <img src="Dart.jpg" alt="image1" class="portfolio-image">
+                <div class="content">
+                    <h2>Dart art competition</h2>
+                    <p>(color pencil) This art piece was for the dart art contest 2024 where I got honorable mentions.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="STATEVASE.jpg" alt="image2" class="portfolio-image">
+                <div class="content">
+                    <h2>Blue Hope</h2>
+                    <p>(clay) This art piece was made for the high school vase art competition 2024 where I got to the state competition.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-header">Digital Art</h2>
+        <div class="category-content">
+            <div class="portfolio-item">
+                <img src="Shrimpy.png" alt="image7" class="portfolio-image">
+                <div class="content">
+                    <h2>Isolated</h2>
+                    <p>(digital) This was classwork for Showing the abilities of Emphasis and Focal Point.</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="figure&ground.jpg" alt="image8" class="portfolio-image">
+                <div class="content">
+                    <h2>Hypnosis</h2>
+                    <p>(digital) This was classwork for Showing the abilities of Figure and Ground.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-header">Competition Art</h2>
+        <div class="category-content">
+            <div class="portfolio-item">
+                <img src="Temoc.png" alt="image16" class="portfolio-image">
+                <div class="content">
+                    <h2>Life of Temoc</h2>
+                    <p>(digital) This was for an art competition for the (UTD) university bookstore for the mascot "Temoc"s everyday life.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div class="image-popup-overlay" id="popupOverlay">
+        <div class="image-popup">
+            <button class="close-btn" id="closePopup">&times;</button>
+            <img src="" alt="Popup Image" id="popupImage">
+        </div>
+    </div>
+
+    <footer>
+        <p>2025 made all by Leyla Bocanegra</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle popup functionality
+        const images = document.querySelectorAll('.portfolio-image');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupImage = document.getElementById('popupImage');
+        const closePopup = document.getElementById('closePopup');
+        const categoryHeaders = document.querySelectorAll('.category-header');
+
+        // Open popup when clicking on an image
+        images.forEach(image => {
+            image.addEventListener('click', () => {
+                popupImage.src = image.src;
+                popupOverlay.classList.add('active');
+            });
+        });
+
+        // Close popup when clicking the close button
+        closePopup.addEventListener('click', () => {
+            popupOverlay.classList.remove('active');
+        });
+
+        // Close popup when clicking outside the image
+        popupOverlay.addEventListener('click', (e) => {
+            if (e.target === popupOverlay) {
+                popupOverlay.classList.remove('active');
+            }
+        });
+
+        // Toggle category visibility
+        categoryHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
